@@ -6,23 +6,23 @@ docker-mongodb
 ### To build:
 
 	Spostarsi nella directory e lanciare il comando
-    sudo docker build -t tornabene/docker-mongodb .
+    sudo docker build -t tornabene/ntipa-mongodb .
 ### To run:
 
     sudo docker pull tornabene/docker-mongodb
     sudo mkdir -p /opt/ntipa/mongodb_data
     
-    sudo docker run  -p 27017:27017 --name mongo.ntipa.it   -d    tornabene/docker-mongodb
-    sudo docker run  -p 27017:27017 --name testmongo   -d  -v  /opt/ntipa/mongodb_data:/data/db   tornabene/docker-mongodb
+    sudo docker run  -p 27017:27017 --name mongo.ntipa.it   -d  -v  /opt/ntipa/mongodb_data:/data/db   tornabene/ntipa-mongodb 
+    sudo docker run  -p 27017:27017 --name testmongo   -d  -v  /opt/ntipa/mongodb_data:/data/db   tornabene/ntipa-mongodb
     
-    sudo docker run  -P --name rs1_srv1  -d tornabene/docker-mongodb --replSet rs1  --noprealloc --smallfiles
-    sudo docker run  -P --name rs1_srv2  -d tornabene/docker-mongodb --replSet rs1  --noprealloc --smallfiles
-    sudo docker run  -P --name rs1_srv3  -d tornabene/docker-mongodb --replSet rs1  --noprealloc --smallfiles
+    sudo docker run  -P --name rs1_srv1  -d tornabene/ntipa-mongodb --replSet rs1  --noprealloc --smallfiles
+    sudo docker run  -P --name rs1_srv2  -d tornabene/ntipa-mongodb --replSet rs1  --noprealloc --smallfiles
+    sudo docker run  -P --name rs1_srv3  -d tornabene/ntipa-mongodb --replSet rs1  --noprealloc --smallfiles
     
     
-    sudo docker run  -P --name rs2_srv1  -d tornabene/docker-mongodb --replSet rs2  --noprealloc --smallfiles
-    sudo docker run  -P --name rs2_srv2  -d tornabene/docker-mongodb --replSet rs2  --noprealloc --smallfiles
-    sudo docker run  -P --name rs2_srv3  -d tornabene/docker-mongodb --replSet rs2  --noprealloc --smallfiles
+    sudo docker run  -P --name rs2_srv1  -d tornabene/ntipa-mongodb --replSet rs2  --noprealloc --smallfiles
+    sudo docker run  -P --name rs2_srv2  -d tornabene/ntipa-mongodb --replSet rs2  --noprealloc --smallfiles
+    sudo docker run  -P --name rs2_srv3  -d tornabene/ntipa-mongodb --replSet rs2  --noprealloc --smallfiles
     
     sudo docker inspect rs1_srv1
     sudo docker inspect rs1_srv2

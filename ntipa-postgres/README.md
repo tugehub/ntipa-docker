@@ -8,7 +8,7 @@
 ### To run:
 
     sudo docker pull tornabene/ntipa-postgres
-    sudo docker run  -rm --name postgres.ntipa.it -p 5432:5432   tornabene/ntipa-postgres
+    sudo docker run  -i --rm --name postgres.ntipa.it -p 5432:5432   tornabene/ntipa-postgres
     
 ### To persist your data:
 
