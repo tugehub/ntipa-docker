@@ -2,6 +2,7 @@
 FROM ubuntu:trusty
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get -y -q  install  python-software-properties software-properties-common
 RUN apt-get -y install openssh-server && mkdir /var/run/sshd
