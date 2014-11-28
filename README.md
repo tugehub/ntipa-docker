@@ -24,4 +24,4 @@ sudo docker run -d --name ntipa-protocollo-amia     -p 8080:8080  -p 8122:22 --l
 
   
 #WEB
-sudo docker run  -d  -p 80:80     --name  ntipa --link ntipa-box-amia:box.ntipa.it  --link ntipa-authserver-amia:oauth.ntipa.it --link ntipa-manager-amia:manager.ntipa.it    tornabene/ntipa-nginx 
+sudo docker run   -p 80:80     --name  ntipa-nginx-amia --link ntipa-box-amia:box.ntipa.it  --link ntipa-authserver-amia:oauth.ntipa.it --link ntipa-manager-amia:manager.ntipa.it --link ntipa-box-amia:protocollo.ntipa.it  -d tornabene/ntipa-nginx 
