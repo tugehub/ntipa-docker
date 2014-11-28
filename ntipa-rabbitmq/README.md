@@ -14,6 +14,6 @@
 
 Here we persistently save our data to the host machine's ``/opt/ntipa/rabbitmq`` directory.
 
-    sudo mkdir -p /opt/ntipa/rabbitmq
-    chmod 777 /opt/ntipa/rabbitmq
-sudo docker run -d --name rabbitmq.ntipa.it -p 5672:5672 -p 15672:15672 -p 1522:22  tornabene/ntipa-rabbitmq -v /opt/ntipa/rabbitmq:/var/lib/rabbitmq/ntipa tornabene/ntipa-rabbitmq
+    sudo mkdir -p /opt/ntipa/rabbitmq_data
+    chmod 777 /opt/ntipa/rabbitmq_data
+sudo docker run  --name rabbitmqamia -p 5672:5672 -p 15672:15672 -p 1522:22  -v /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq/ntipa -d tornabene/ntipa-rabbitmq

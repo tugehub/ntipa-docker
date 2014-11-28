@@ -12,8 +12,8 @@ docker-mongodb
     sudo docker pull tornabene/docker-mongodb
     sudo mkdir -p /opt/ntipa/mongodb_data
     
-    sudo docker run  -p 27017:27017 --name mongo.ntipa.it   -d  -v  /opt/ntipa/mongodb_data:/data/db   tornabene/ntipa-mongodb 
-    sudo docker run  -p 27017:27017 --name testmongo   -d  -v  /opt/ntipa/mongodb_data:/data/db   tornabene/ntipa-mongodb
+    sudo docker run  -p 27017:27017 --name mongo.ntipa.it   -d  -v  /opt/ntipa/mongodb_data:/data/db   tornabene/ntipa-mongodb  --journal
+    sudo docker run  -p 27017:27017 --name testmongo   -d  tornabene/ntipa-mongodb --journal
     
     sudo docker run  -P --name rs1_srv1  -d tornabene/ntipa-mongodb --replSet rs1  --noprealloc --smallfiles
     sudo docker run  -P --name rs1_srv2  -d tornabene/ntipa-mongodb --replSet rs1  --noprealloc --smallfiles
