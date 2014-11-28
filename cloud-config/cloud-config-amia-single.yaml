@@ -1,0 +1,20 @@
+#cloud-config
+hostname: monica
+ssh_authorized_keys:
+  - ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC25ulEfze1+1tKMzGlwCAfgXQiKo38mpy91VMiJ6b5iiBNgHlPwVSbbc+5Lt5KuYYMtXeO6DkHx1J5S2I3qnNZCvdphb+kPtBtAwvJTHTnuotm0KFXqt8TUcEAbjDAg4wld9Pk4vTMAXn8qjzc0MdKP8v2S/Gj/rZUrXWAU7TrhS7spgfm0fb/qyy0GIJE/ustqxYabWipkSyAMrXDylhAbYYXgXYbTz7PLg4y/WwXjdZa1BQFjqPnYjuJnec8qVbu43Qpt6uThjNH0V1tZF0beSglOZZqiHm+GURLRW9osCbyk1dB0XKjod4k0vDMrfwqpKluWpIeUFfdpFrOK7nP tindaro.tornabene@gmail.com
+coreos:
+  units:
+    - name: etcd.service
+      command: start
+    - name: fleet.service
+      command: start
+    #- name: opt-blockstorage.mount
+    #  command: start
+    #  content: |
+    #    [Mount]
+    #    What=/dev/vdb1
+    #    Where=/opt
+    #    Type=ext4
+  etcd:
+    name: monica
+    discovery: https://discovery.etcd.io/0e82bf6087cc44a758348ba702dd938a
