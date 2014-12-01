@@ -2,7 +2,7 @@
 Description=Ntipa oauth
 After=etcd.service
 After=docker.service
-#Requires=ntipa-auth-discovery@%i.service
+Requires=ntipa-auth-discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
