@@ -2,23 +2,28 @@ FROM tornabene/docker-ntipa-base
 
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
-RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selections
-RUN apt-get update && apt-get install -y -q wget apt-transport-https
 
-ADD nginx.crt /etc/ssl/nginx/
-ADD nginx.key /etc/ssl/nginx/
+RUN apt-get install -y --force-yes nginx curl
 
-# Install NGINX Plus
-RUN apt-get update 
-RUN apt-get install -y nginx-full
+RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v0.3.0/confd_0.3.0_linux_amd64.tar.gz | tar xz
+RUN mv confd /usr/local/bin/confd
 
-RUN ln -sf /dev/stdout /var/log/nginx/access.log
-RUN ln -sf /dev/stderr /var/log/nginx/error.log
+RUN mkdir -p /etc/confd/conf.d
+RUN mkdir -p /etc/confd/templates
 
-ADD default  /etc/nginx/sites-enabled/default
-EXPOSE 80 443
+ADD ./nginx.conf.tmpl /etc/confd/templates/nginx.conf.tmpl
+ADD ./nginx.toml /etc/confd/conf.d/nginx.toml
 
-CMD ["nginx", "-g", "daemon off;"]
+# Remove default site
+RUN rm -f /etc/nginx/sites-enabled/default
+
+# Add boot script
+ADD ./boot.sh /opt/boot.sh
+RUN chmod +x /opt/boot.sh
+
+# Run the boot script
+CMD /opt/boot.sh
+
 
 
 
