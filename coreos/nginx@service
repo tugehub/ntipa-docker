@@ -2,7 +2,6 @@
 Description=Nginx Load balance proxy Ntipa
 After=etcd.service
 After=docker.service
-Requires=nginx-discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
