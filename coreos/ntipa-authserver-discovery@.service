@@ -2,8 +2,10 @@
 Description=ntipa-auth %i etcd registration
 Requires=etcd.service
 Requires=ntipa-auth@%i.service
+
 After=etcd.service
 After=ntipa-auth@%i.service
+
 BindsTo=ntipa-auth@%i.service
 
 [Service]

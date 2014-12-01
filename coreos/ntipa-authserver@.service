@@ -2,7 +2,6 @@
 Description=Ntipa oauth
 After=etcd.service
 After=docker.service
-Requires=ntipa-auth-discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
@@ -10,9 +9,8 @@ KillMode=none
 EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill ntipa-auth-%i
 ExecStartPre=-/usr/bin/docker rm ntipa-auth-%i
-ExecStartPre=/usr/bin/docker pull tornabene/ntipa-authserver 
+ExecStartPre=/usr/bin/docker pull tornabene/ntipa-authserver
 ExecStart=/usr/bin/docker run --name ntipa-auth-%i -p %i:8443   --link postgres:postgres.ntipa.it  --link rabbitmq:rabbitmq.ntipa.it --link solr:solr.ntipa.it  --link  mongodb:mongo.ntipa.it tornabene/ntipa-authserver
+ExecStartPost=/usr/bin/etcdctl set /ntipa/apis/ntipa-auth/%i ${COREOS_PRIVATE_IPV4}:%i
 ExecStop=/usr/bin/docker stop ntipa-auth-%i
-
-[X-Fleet]
-X-Conflicts=ntipa-auth@*.service
+ExecStopPost=/usr/bin/etcdctl rm /ntipa/apis/ntipa-auth/%i
