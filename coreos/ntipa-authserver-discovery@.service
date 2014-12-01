@@ -1,0 +1,25 @@
+[Unit]
+Description=ntipa-auth %i etcd registration
+Requires=etcd.service
+Requires=ntipa-auth@%i.service
+After=etcd.service
+After=ntipa-auth@%i.service
+BindsTo=ntipa-auth@%i.service
+
+[Service]
+EnvironmentFile=/etc/environment
+ExecStart=/bin/bash -c '\
+  while true; do \
+    curl -f ${COREOS_PRIVATE_IPV4}:%i; \
+    if [ $? -eq 0 ]; then \
+      etcdctl set /ntipa/services/ntipa-auth/${COREOS_PRIVATE_IPV4} \'${COREOS_PRIVATE_IPV4}:%i\' --ttl 30; \
+    else \
+      etcdctl rm /ntipa/services/ntipa-auth/${COREOS_PRIVATE_IPV4}; \
+    fi; \
+    sleep 20; \
+  done'
+
+ExecStop=/usr/bin/etcdctl rm /ntipa/services/ntipa-auth/${COREOS_PRIVATE_IPV4}
+
+[X-Fleet]
+X-ConditionMachineOf=ntipa-auth@%i.service
