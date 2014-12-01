@@ -14,14 +14,12 @@ RUN mkdir -p /etc/confd/templates
 ADD ./nginx.conf.tmpl /etc/confd/templates/nginx.conf.tmpl
 ADD ./nginx.toml /etc/confd/conf.d/nginx.toml
 
-# Remove default site
 RUN rm -f /etc/nginx/sites-enabled/default
 
 # Add boot script
 ADD ./boot.sh /opt/boot.sh
 RUN chmod +x /opt/boot.sh
 
-# Run the boot script
 CMD /opt/boot.sh
 
 
