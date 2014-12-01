@@ -11,8 +11,9 @@ ExecStartPre=-/usr/bin/docker kill solr
 ExecStartPre=-/usr/bin/docker rm solr
 ExecStartPre=/usr/bin/docker pull  tornabene/docker-solr
 ExecStart=/usr/bin/docker run  --name solr -p 8983:8983 -p 8922:22  tornabene/docker-solr
-ExecStartPost=/usr/bin/etcdctl set /ntipa/solr/%i ${COREOS_PUBLIC_IPV4}:%i
+ExecStartPost=/usr/bin/etcdctl set /ntipa/services/solr/%i ${COREOS_PRIVATE_IPV4}:%i
 ExecStop=/usr/bin/docker stop solr
+ExecStopPost=/usr/bin/etcdctl rm /ntipa/services/solr/%i
 
 [X-Fleet]
 X-Conflicts=solr@*.service
