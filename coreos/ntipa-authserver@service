@@ -11,8 +11,9 @@ EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill ntipa-auth%i
 ExecStartPre=-/usr/bin/docker rm ntipa-auth%i
 ExecStartPre=/usr/bin/docker pull tornabene/ntipa-authserver 
-ExecStart=/usr/bin/docker run --name ntipa-auth%i -p 8443:8443 --link postgres:postgres.ntipa.it  --link rabbitmq:rabbitmq.ntipa.it --link solr:solr.ntipa.it  --link  mongo:mongo.ntipa.it tornabene/ntipa-authserver 
+ExecStart=/usr/bin/docker run --name ntipa-auth%i -p 8443:8443 --link postgres:postgres.ntipa.it  --link rabbitmq:rabbitmq.ntipa.it --link solr:solr.ntipa.it  --link  mongo:mongo.ntipa.it tornabene/ntipa-authserver
+ExecStartPost=/usr/bin/etcdctl set /ntipa/ntipa-auth/%i ${COREOS_PUBLIC_IPV4}:%i 
 ExecStop=/usr/bin/docker stop ntipa-auth%i
 
 [X-Fleet]
-X-Conflicts=ntipa-auth@*.service
+X-Conflicts=ntipa-auth@%i.service
