@@ -10,7 +10,8 @@ EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill postgres
 ExecStartPre=-/usr/bin/docker rm postgres
 ExecStartPre=/usr/bin/docker pull  tornabene/ntipa-postgres
-ExecStart=/usr/bin/docker --name postgres -p 5432:5432 -v  /opt/ntipa/postgresql_data:/var/lib/postgresql tornabene/ntipa-postgres
+ExecStartPre=mkdir -p /opt/ntipa/postgresql_data
+ExecStart=/usr/bin/docker --name postgres -p 5432:5432 -v /opt/ntipa/postgresql_data:/var/lib/postgresql tornabene/ntipa-postgres
 ExecStop=/usr/bin/docker stop postgres
 
 [X-Fleet]
