@@ -1,0 +1,17 @@
+[Unit]
+Description=Ntipa Solr
+After=etcd.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill solr
+ExecStartPre=-/usr/bin/docker rm solr
+ExecStartPre=/usr/bin/docker pull  tornabene/docker-solr
+ExecStart=/usr/bin/docker run  --name solr -p 8983:8983 -p 8922:22  tornabene/docker-solr
+ExecStop=/usr/bin/docker stop solr
+
+[X-Fleet]
+X-Conflicts=solr@*.service

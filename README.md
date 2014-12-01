@@ -1,11 +1,18 @@
 ntipa-docker
 ============
 
-ntipa-docker per amia
+##ntipa-docker per amia
+
+#CANCELLA TUTTI I DATI
+sudo rm -fr /opt/ntipa
 
 sudo mkdir -p /opt/ntipa/mongodb_data
 sudo mkdir -p /opt/ntipa/postgresql_data
 sudo mkdir -p /opt/ntipa/rabbitmq_data
+
+#Stoppare tutti i contenitori
+sudo docker rm -f mongoamia postgresamia rabbitmqamia solramia ntipa-authserver-amia ntipa-manager-amia ntipa-box-amia  ntipa-nginx-amia
+
 
 #SERVICE 
 sudo docker run  --name mongoamia    -p 27017:27017  -v  /opt/ntipa/mongodb_data:/data/db -d   tornabene/ntipa-mongodb  --journal
@@ -20,7 +27,7 @@ sudo docker run -d --name ntipa-manager-amia     -p 8081:8081  -p 8122:22 --link
 
 sudo docker run -d --name ntipa-box-amia         -p 8333:8333  -p 8322:22 --link postgresamia:postgres.ntipa.it  --link rabbitmqamia:rabbitmq.ntipa.it --link solramia:solr.ntipa.it  --link  mongoamia:mongo.ntipa.it   --link ntipa-authserver-amia:oauth.ntipa.it --link ntipa-manager-amia:manager.ntipa.it    tornabene/ntipa-box
   
-sudo docker run -d --name ntipa-protocollo-amia     -p 8080:8080  -p 8122:22 --link postgresamia:postgres.ntipa.it  --link rabbitmqamia:rabbitmq.ntipa.it --link solramia:solr.ntipa.it  --link  mongoamia:mongo.ntipa.it   --link ntipa-authserver-amia:oauth.ntipa.it --link ntipa-box-amia:box.ntipa.it  tornabene/ntipa-protocollo
+#sudo docker run -d --name ntipa-protocollo-amia     -p 8080:8080  -p 8122:22 --link postgresamia:postgres.ntipa.it  --link rabbitmqamia:rabbitmq.ntipa.it --link solramia:solr.ntipa.it  --link  mongoamia:mongo.ntipa.it   --link ntipa-authserver-amia:oauth.ntipa.it --link ntipa-box-amia:box.ntipa.it  tornabene/ntipa-protocollo
 
   
 #WEB
