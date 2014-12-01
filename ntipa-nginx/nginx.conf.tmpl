@@ -1,9 +1,20 @@
 upstream pool_authserver {
-  {{ range $server := .ntipa_apis_ntipa-auth }}
+  {{ range $server := .ntipa_apis_authserver }}
   server {{ $server.Value }};
   {{ end }}
 }
 
+upstream pool_box {
+  {{ range $server := .ntipa_apis_box }}
+  server {{ $server.Value }};
+  {{ end }}
+}
+
+upstream pool_protocollo {
+  {{ range $server := .ntipa_apis_protocollo }}
+  server {{ $server.Value }};
+  {{ end }}
+}
 
 server {
   server_name _;
@@ -21,7 +32,7 @@ server {
           }
           
           location /box {
-            proxy_pass http://box.ntipa.it:8333/box;
+            proxy_pass http://pool_box/box;
             proxy_redirect off;
             proxy_set_header        Host            $host;
             proxy_set_header        X-Real-IP       $remote_addr;
@@ -35,7 +46,7 @@ server {
           
           
          location /manager {
-            proxy_pass http://manager.ntipa.it:8081/manager;
+            proxy_pass http://pool_manager/manager;
             proxy_redirect off;
             proxy_set_header        Host            $host;
             proxy_set_header        X-Real-IP       $remote_addr;
@@ -47,7 +58,7 @@ server {
           }
           
          location /protocollo {
-            proxy_pass http://protocollo.ntipa.it:8080/protocollo;
+            proxy_pass http://pool_protocollo/protocollo;
             proxy_redirect off;
             proxy_set_header        Host            $host;
             proxy_set_header        X-Real-IP       $remote_addr;
