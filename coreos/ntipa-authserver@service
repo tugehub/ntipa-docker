@@ -1,18 +1,18 @@
 [Unit]
-Description=Nginx Load balance proxy Ntipa
+Description=Ntipa oauth
 After=etcd.service
 After=docker.service
-Requires=nginx-discovery@%i.service
+Requires=ntipa-auth-discovery@%i.service
 
 [Service]
 TimeoutStartSec=0
 KillMode=none
 EnvironmentFile=/etc/environment
-ExecStartPre=-/usr/bin/docker kill nginx%i
-ExecStartPre=-/usr/bin/docker rm nginx%i
-ExecStartPre=/usr/bin/docker pull tornabene/ntipa-nginx 
-ExecStart=/usr/bin/docker run --name nginx%i -p ${COREOS_PUBLIC_IPV4}:%i:80 tornabene/ntipa-nginx
-ExecStop=/usr/bin/docker stop nginx%i
+ExecStartPre=-/usr/bin/docker kill ntipa-auth%i
+ExecStartPre=-/usr/bin/docker rm ntipa-auth%i
+ExecStartPre=/usr/bin/docker pull tornabene/ntipa-authserver 
+ExecStart=/usr/bin/docker run --name ntipa-auth%i -p 8443:8443  tornabene/ntipa-authserver 
+ExecStop=/usr/bin/docker stop ntipa-auth%i
 
 [X-Fleet]
-X-Conflicts=nginx@*.service
+X-Conflicts=ntipa-auth@*.service
