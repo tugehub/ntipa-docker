@@ -1,0 +1,18 @@
+[Unit]
+Description=Mongo Ntipa
+After=etcd.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill mongodb
+ExecStartPre=-/usr/bin/docker rm mongodb
+ExecStartPre=/usr/bin/docker pull  tornabene/ntipa-mongodb
+ExecStartPre=/usr/bin/mkdir -p /opt/ntipa/mongodb_data
+ExecStart=/usr/bin/docker run  --name mongodb    -p 27017:27017  -v  /opt/ntipa/mongodb_data:/data/db  tornabene/ntipa-mongodb  --journal
+ExecStop=/usr/bin/docker stop mongodb
+
+[X-Fleet]
+X-Conflicts=mongodb@*.service
