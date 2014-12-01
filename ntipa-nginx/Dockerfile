@@ -5,7 +5,8 @@ MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
 RUN apt-get install -y --force-yes nginx curl
 
-RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v0.3.0/confd_0.3.0_linux_amd64.tar.gz | tar xz
+RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v0.5.0/confd_0.5.0_linux_amd64.tar.gz | tar xz
+RUN chmod +x confd
 RUN mv confd /usr/local/bin/confd
 
 RUN mkdir -p /etc/confd/conf.d
