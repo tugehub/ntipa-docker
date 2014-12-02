@@ -10,8 +10,8 @@ upstream pool_box {
   {{ end }}
 }
 
-upstream pool_protocollo {
-  {{ range $server := .ntipa_apis_protocollo }}
+upstream pool_manager {
+  {{ range $server := .ntipa_apis_manager }}
   server {{ $server.Value }};
   {{ end }}
 }
