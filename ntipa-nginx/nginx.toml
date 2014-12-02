@@ -1,5 +1,5 @@
 [template]
-keys        = [ "/ntipa/apis/authserver", "/ntipa/apis/box","/ntipa/apis/manager" ]
+keys        = [ "ntipa/apis/authserver", "ntipa/apis/box","ntipa/apis/manager" ]
 owner       = "nginx"
 mode        = "0644"
 src         = "nginx.conf.tmpl"
