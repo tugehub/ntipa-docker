@@ -19,8 +19,7 @@ upstream pool_manager {
 server {
     listen 80 default_server;
     listen [::]:80 default_server ipv6only=on;
-    access_log /var/log/nginx/access.log upstreamlog;
-
+    
          location /authserver {
             proxy_pass http://pool_authserver/authserver;
             proxy_redirect off;

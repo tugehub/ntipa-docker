@@ -3,7 +3,7 @@ FROM tornabene/docker-ntipa-base
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
 
-RUN apt-get install -y --force-yes nginx curl
+RUN apt-get install -y --force-yes nginx curl vim
 
 
 WORKDIR /usr/local/bin/
