@@ -1,18 +1,18 @@
 upstream pool_authserver {
-  {{ range $server := .ntipa_apis_authserver }}
-  server {{ $server.Value }};
+  {{ range $serverAuth := .ntipa_apis_authserver }}
+  server {{ $serverAuth.Value }};
   {{ end }}
 }
 
 upstream pool_box {
-  {{ range $server := .ntipa_apis_box }}
-  server {{ $server.Value }};
+  {{ range $serverBox := .ntipa_apis_box }}
+  server {{ $serverBox.Value }};
   {{ end }}
 }
 
 upstream pool_manager {
-  {{ range $server := .ntipa_apis_manager }}
-  server {{ $server.Value }};
+  {{ range $serverManager := .ntipa_apis_manager }}
+  server {{ $serverManager.Value }};
   {{ end }}
 }
 
