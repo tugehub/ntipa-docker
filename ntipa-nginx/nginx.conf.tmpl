@@ -17,7 +17,9 @@ upstream pool_protocollo {
 }
 
 server {
-  server_name _;
+    listen 80 default_server;
+    listen [::]:80 default_server ipv6only=on;
+    access_log /var/log/nginx/access.log upstreamlog;
 
          location /authserver {
             proxy_pass http://pool_authserver/authserver;
