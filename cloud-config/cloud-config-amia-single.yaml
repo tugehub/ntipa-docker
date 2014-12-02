@@ -1,5 +1,4 @@
 #cloud-config
-hostname: amia
 ssh_authorized_keys:
   - ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQC25ulEfze1+1tKMzGlwCAfgXQiKo38mpy91VMiJ6b5iiBNgHlPwVSbbc+5Lt5KuYYMtXeO6DkHx1J5S2I3qnNZCvdphb+kPtBtAwvJTHTnuotm0KFXqt8TUcEAbjDAg4wld9Pk4vTMAXn8qjzc0MdKP8v2S/Gj/rZUrXWAU7TrhS7spgfm0fb/qyy0GIJE/ustqxYabWipkSyAMrXDylhAbYYXgXYbTz7PLg4y/WwXjdZa1BQFjqPnYjuJnec8qVbu43Qpt6uThjNH0V1tZF0beSglOZZqiHm+GURLRW9osCbyk1dB0XKjod4k0vDMrfwqpKluWpIeUFfdpFrOK7nP tindaro.tornabene@gmail.com
 coreos:
@@ -9,5 +8,6 @@ coreos:
     - name: fleet.service
       command: start
   etcd:
-    name: amia
-    discovery: https://discovery.etcd.io/9db15d5cb7c8972ae75c52c14460a3b5
+    discovery: https://discovery.etcd.io/894e0bb81e93cd0fb27ef83b0566b0eb
+    addr: $private_ipv4:4001
+    peer-addr: $private_ipv4:7001
