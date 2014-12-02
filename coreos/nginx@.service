@@ -7,11 +7,8 @@ After=docker.service
 TimeoutStartSec=0
 KillMode=none
 EnvironmentFile=/etc/environment
-ExecStartPre=-/usr/bin/docker kill nginx%i
-ExecStartPre=-/usr/bin/docker rm nginx%i
+ExecStartPre=-/usr/bin/docker kill nginx
+ExecStartPre=-/usr/bin/docker rm nginx
 ExecStartPre=/usr/bin/docker pull tornabene/ntipa-nginx 
-ExecStart=/usr/bin/docker run --name nginx%i -p ${COREOS_PUBLIC_IPV4}:%i:80 tornabene/ntipa-nginx
-ExecStop=/usr/bin/docker stop nginx%i
-
-[X-Fleet]
-X-Conflicts=nginx@*.service
+ExecStart=/usr/bin/docker run --name nginx -p ${COREOS_PUBLIC_IPV4}:80:80 tornabene/ntipa-nginx
+ExecStop=/usr/bin/docker stop nginx
