@@ -9,7 +9,6 @@ export ETCD=$HOST_IP:4001
 
 echo "[nginx] booting container. ETCD: $ETCD"
 
-# Loop until confd has updated the nginx config
 until confd -onetime -node $ETCD -config-file /etc/confd/conf.d/nginx.toml; do
   echo "[nginx] waiting for confd to refresh nginx.conf"
   echo "[nginx] waiting for confd to refresh. ETCD: $ETCD"
