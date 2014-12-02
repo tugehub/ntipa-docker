@@ -1,5 +1,5 @@
 [Unit]
-Description=Ntipa oauth
+Description=Ntipa manager
 After=etcd.service
 After=docker.service
 
@@ -7,11 +7,11 @@ After=docker.service
 TimeoutStartSec=0
 KillMode=none
 EnvironmentFile=/etc/environment
-ExecStartPre=-/usr/bin/docker kill ntipa-auth-%i
-ExecStartPre=-/usr/bin/docker rm ntipa-auth-%i
-ExecStartPre=/usr/bin/docker pull tornabene/ntipa-authserver
-ExecStart=/usr/bin/docker run --name ntipa-auth-%i -p %i:8443   --link postgres:postgres.ntipa.it  --link rabbitmq:rabbitmq.ntipa.it --link solr:solr.ntipa.it  --link  mongodb:mongo.ntipa.it tornabene/ntipa-authserver
-ExecStartPost=/usr/bin/etcdctl set /ntipa/apis/authserver/%i ${COREOS_PRIVATE_IPV4}:%i
-ExecStop=/usr/bin/docker stop ntipa-auth-%i
-ExecStopPost=/usr/bin/etcdctl rm /ntipa/apis/authserver/%i
+ExecStartPre=-/usr/bin/docker kill ntipa-manager-%i
+ExecStartPre=-/usr/bin/docker rm ntipa-manager-%i
+ExecStartPre=/usr/bin/docker pull tornabene/ntipa-manager
+ExecStart=/usr/bin/docker run --name ntipa-manager-%i -p %i:8081   --link postgres:postgres.ntipa.it  --link rabbitmq:rabbitmq.ntipa.it --link solr:solr.ntipa.it  --link  mongodb:mongo.ntipa.it tornabene/ntipa-manager
+ExecStartPost=/usr/bin/etcdctl set /ntipa/apis/manager/%i ${COREOS_PRIVATE_IPV4}:%i
+ExecStop=/usr/bin/docker stop ntipa-manager-%i
+ExecStopPost=/usr/bin/etcdctl rm /ntipa/apis/manager/%i
 
