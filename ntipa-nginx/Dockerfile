@@ -5,9 +5,11 @@ MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
 RUN apt-get install -y --force-yes nginx curl
 
-RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v0.5.0/confd_0.5.0_linux_amd64-linux-amd64 -o confd
+
+WORKDIR /usr/local/bin/
+RUN rm confd
+RUN curl -L https://github.com/kelseyhightower/confd/releases/download/v0.6.3/confd-0.6.3-linux-amd64 -o confd
 RUN chmod +x confd
-RUN mv confd /usr/local/bin/confd
 
 RUN mkdir -p /etc/confd/{conf.d,templates}
 ADD nginx.conf.tmpl /etc/confd/templates/nginx.conf.tmpl
