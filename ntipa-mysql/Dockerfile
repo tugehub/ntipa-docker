@@ -4,7 +4,7 @@ MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 # Install packages
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update && \
-  apt-get -yq install mysql-server-5.6 pwgen && \
+  apt-get -yq install mysql-server-5.5 pwgen && \
   rm -rf /var/lib/apt/lists/*
 
 # Remove pre-installed database
