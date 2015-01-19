@@ -15,10 +15,11 @@ sudo docker rm -f mongoamia postgresamia rabbitmqamia solramia ntipa-authserver-
 
 
 #SERVICE 
-sudo docker run  --name mongoamia    -p 27017:27017  -v  /opt/ntipa/mongodb_data:/data/db -tid   tornabene/ntipa-mongodb  --journal
-sudo docker run  --name postgresamia -p 5432:5432 -v  /opt/ntipa/postgresql_data:/var/lib/postgresql -tid   tornabene/ntipa-postgres     
-sudo docker run  --name rabbitmqamia -p 5672:5672 -p 15672:15672 -p 1522:22  -v /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq/ntipa -tid tornabene/ntipa-rabbitmq
-sudo docker run  --name solramia -p 8983:8983 -p 8922:22  -tid tornabene/docker-solr
+###sudo docker run  --name mongoamia    -p 27017:27017  -v  /opt/ntipa/mongodb_data:/data/db -tid   tornabene/ntipa-mongodb  --journal
+
+###sudo docker run  --name postgresamia -p 5432:5432 -v  /opt/ntipa/postgresql_data:/var/lib/postgresql -tid   tornabene/ntipa-postgres     
+###sudo docker run  --name rabbitmqamia -p 5672:5672 -p 15672:15672 -p 1522:22  -v /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq/ntipa -tid tornabene/ntipa-rabbitmq
+###sudo docker run  --name solramia -p 8983:8983 -p 8922:22  -tid tornabene/docker-solr
 
 #Per entrare nelle istanze senza ssh usare:
 ##	sudo docker exec container comando 
