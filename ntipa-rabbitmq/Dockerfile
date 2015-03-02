@@ -16,6 +16,8 @@ RUN echo "export VISIBLE=now" >> /etc/profile
 
 RUN apt-get -qq -y install rabbitmq-server
 RUN /usr/sbin/rabbitmq-plugins enable rabbitmq_management
+RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_stomp
+RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_shovel
 RUN echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config
 ADD set_rabbitmq_password.sh /set_rabbitmq_password.sh
 
