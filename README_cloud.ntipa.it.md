@@ -95,9 +95,11 @@ box:
 manager:
   ports:
    - "8081:8081"
+  expose:
+   - "8081"
   links:
    - postgres:postgres.ntipa.it
-   - mongo:mongo.ntipa.it
+   - mongodb:mongo.ntipa.it
    - rabbitmq:rabbitmq.ntipa.it
    - solr:solr.ntipa.it
   image: tornabene/ntipa-manager  

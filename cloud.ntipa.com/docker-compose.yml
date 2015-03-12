@@ -1,3 +1,13 @@
+box:
+  ports:
+   - "8333:8333"
+  links:
+   - postgres:postgres.ntipa.it
+   - manager:manager.ntipa.it   
+   - mongodb:mongo.ntipa.it
+   - rabbitmq:rabbitmq.ntipa.it
+   - solr:solr.ntipa.it
+  image: tornabene/ntipa-box
 manager:
   ports:
    - "8081:8081"
