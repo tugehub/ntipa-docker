@@ -11,15 +11,15 @@ upstream solr_prod {
 }
 
 upstream manager_prod {
-        server manager.ntipa.it:8081;
+        server manager:8081;
 }
 
 upstream protocollo_prod {
-        server protocollo.ntipa.it:8080;
+        server protocollo:8080;
 }
 
 upstream box_prod {
-        server box.ntipa.it:8333;
+        server box:8333;
 }
 
 
@@ -39,7 +39,7 @@ server {
           }
 
 		 location /solr {
-            proxy_pass http://solr_prod/box;
+            proxy_pass http://solr_prod/solr;
             proxy_redirect off;
             proxy_set_header        Host            $host;
             proxy_set_header        X-Real-IP       $remote_addr;
