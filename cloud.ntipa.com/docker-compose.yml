@@ -1,9 +1,17 @@
+nginx:
+  ports:
+   - "80:80"
+  links:
+   - box:box.ntipa.it
+   - manager:manager.ntipa.it
+  image: tornabene/ntipa-nginx
 box:
   ports:
    - "8333:8333"
   links:
+   - manager:cloud.ntipa.com 
+   - manager:ntipa.ipublic.it      
    - postgres:postgres.ntipa.it
-   - manager:manager.ntipa.it   
    - mongodb:mongo.ntipa.it
    - rabbitmq:rabbitmq.ntipa.it
    - solr:solr.ntipa.it
