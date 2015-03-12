@@ -6,6 +6,7 @@ nginx:
   links:
    - box:box.ntipa.it
    - manager:manager.ntipa.it
+   - solr:solr.ntipa.it
    - manager:protocollo.ntipa.it
   image: tornabene/ntipa-nginx
 box:
