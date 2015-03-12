@@ -13,6 +13,8 @@ ntipa-docker
 curl -L https://github.com/docker/compose/releases/download/1.1.0/docker-compose-`uname -s`-`uname -m` > /usr/local/bin/docker-compose
 chmod +x /usr/local/bin/docker-compose
 
+ /opt/ntipa/
+ 
 ##Su openstack
 #sudo -i
 #echo "127.0.0.1  "`hostname` >> /etc/hosts
@@ -76,3 +78,52 @@ sudo docker rm -f mongocloud postgrescloud rabbitmqcloud  solrcloud   managerclo
   
 #REVERSY PROXY
 `sudo docker run   -p 80:80     --name  ntipa-nginx-amia --link ntipa-box-amia:box.ntipa.it  --link ntipa-authserver-amia:oauth.ntipa.it --link ntipa-manager-amia:manager.ntipa.it --link ntipa-box-amia:protocollo.ntipa.it  -tid tornabene/ntipa-nginx`
+
+
+
+
+box:
+  ports:
+   - "8333:8333"
+  links:
+   - postgres:postgres.ntipa.it
+   - manager:manager.ntipa.it   
+   - mongo:mongo.ntipa.it
+   - rabbitmq:rabbitmq.ntipa.it
+   - solr:solr.ntipa.it
+  image: tornabene/ntipa-box
+manager:
+  ports:
+   - "8081:8081"
+  links:
+   - postgres:postgres.ntipa.it
+   - mongo:mongo.ntipa.it
+   - rabbitmq:rabbitmq.ntipa.it
+   - solr:solr.ntipa.it
+  image: tornabene/ntipa-manager  
+mongo:
+  image: tornabene/ntipa-mongodb
+  volumes:
+   - /opt/ntipa/mongodb_data:/data/db
+  ports:
+   - "27017:27017"
+postgres:
+  image: tornabene/ntipa-postgres
+  volumes:
+   - /opt/ntipa/postgresql_data:/var/lib/postgresql
+  ports:
+   - "5432:5432"
+rabbitmq:
+  image: tornabene/ntipa-rabbitmq
+  volumes:
+   - /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq/ntipa
+  ports:
+   - "5672:5672"
+   - "15672:15672"
+   - "61613:61613"
+   - "25672:25672"
+   - "4369:4369"
+solr:
+  image: tornabene/ntipa-solr
+  ports:
+   - "8983:8983"
