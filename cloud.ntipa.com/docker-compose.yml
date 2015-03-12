@@ -1,0 +1,45 @@
+box:
+  ports:
+   - "8333:8333"
+  links:
+   - postgres:postgres.ntipa.it
+   - manager:manager.ntipa.it   
+   - mongo:mongo.ntipa.it
+   - rabbitmq:rabbitmq.ntipa.it
+   - solr:solr.ntipa.it
+  image: tornabene/ntipa-box
+manager:
+  ports:
+   - "8081:8081"
+  links:
+   - postgres:postgres.ntipa.it
+   - mongo:mongo.ntipa.it
+   - rabbitmq:rabbitmq.ntipa.it
+   - solr:solr.ntipa.it
+  image: tornabene/ntipa-manager  
+mongo:
+  image: tornabene/ntipa-mongodb
+  volumes:
+   - /opt/ntipa/mongodb_data:/data/db
+  ports:
+   - "27017:27017"
+postgres:
+  image: tornabene/ntipa-postgres
+  volumes:
+   - /opt/ntipa/postgresql_data:/var/lib/postgresql
+  ports:
+   - "5432:5432"
+rabbitmq:
+  image: tornabene/ntipa-rabbitmq
+  volumes:
+   - /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq/ntipa
+  ports:
+   - "5672:5672"
+   - "15672:15672"
+   - "61613:61613"
+   - "25672:25672"
+   - "4369:4369"
+solr:
+  image: tornabene/ntipa-solr
+  ports:
+   - "8983:8983"
