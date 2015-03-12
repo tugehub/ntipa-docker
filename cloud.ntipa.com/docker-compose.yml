@@ -1,13 +1,18 @@
 nginx:
   ports:
    - "80:80"
+  expose:
+   - "80"   
   links:
    - box:box.ntipa.it
    - manager:manager.ntipa.it
+   - manager:protocollo.ntipa.it
   image: tornabene/ntipa-nginx
 box:
   ports:
    - "8333:8333"
+  expose:
+   - "8333"     
   links:
    - manager:cloud.ntipa.com 
    - manager:ntipa.ipublic.it      

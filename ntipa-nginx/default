@@ -2,9 +2,9 @@ map $http_upgrade $connection_upgrade {
     default upgrade;
     '' close;
 }
-
+#si devono scoprire da soli
 upstream manager_prod {
-        server box.ntipa.it:8081;
+        server manager.ntipa.it:8081;
 }
 
 upstream protocollo_prod {
@@ -18,8 +18,6 @@ upstream box_prod {
 
 server {
         listen 80 ;
-        #listen [::]:80 ipv6only=on;
-        server_name cloud.ntipa.com;
 
         location / {
             proxy_pass http://box_prod/box;
@@ -71,3 +69,4 @@ server {
           }
 
 }
+                                                                                                                                              
