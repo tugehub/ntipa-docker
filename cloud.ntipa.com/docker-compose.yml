@@ -1,3 +1,13 @@
+boxConsumer:
+  environment:
+   - "MONGO_HOST=172.17.42.1"
+   - "SOLR_HOST=172.17.42.1"
+   - "RABBITMQ_ADDRESSES=172.17.42.1:5672"   
+  links:
+   - mongodb:mongo.ntipa.com
+   - rabbitmq:rabbitmq.ntipa.com
+   - solr:solr.ntipa.com
+  image: tornabene/ntipa-box-consumer
 web:
   dns:
   - 10.10.130.35
@@ -24,20 +34,6 @@ box:
    - rabbitmq:rabbitmq.ntipa.it
    - solr:solr.ntipa.it
   image: tornabene/ntipa-box
-boxConsumer:
-  ports:
-   - "9333:9333"
-  expose:
-   - "9333"
-  environment:
-   - "MONGO_HOST=mongo.ntipa.com"
-   - "SOLR_HOST=solr.ntipa.com"
-   - "RABBITMQ_ADDRESSES=rabbitmq.ntipa.com:5672"   
-  links:
-   - mongodb:mongo.ntipa.com
-   - rabbitmq:rabbitmq.ntipa.com
-   - solr:solr.ntipa.com
-  image: tornabene/ntipa-box-consumer
 manager:
   dns:
   - 10.10.130.35
@@ -71,7 +67,7 @@ postgres:
 rabbitmq:
   image: tornabene/ntipa-rabbitmq
   volumes:
-   - /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq/ntipa
+   - /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq
   ports:
    - "5672:5672"
    - "15672:15672"
@@ -79,7 +75,11 @@ rabbitmq:
    - "25672:25672"
    - "4369:4369"
   expose:
-   - "15672"
+   - "5672:5672"
+   - "15672:15672"
+   - "61613:61613"
+   - "25672:25672"
+   - "4369:4369"
 solr:
   image: tornabene/ntipa-solr
   ports:
