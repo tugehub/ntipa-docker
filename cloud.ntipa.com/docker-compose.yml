@@ -24,6 +24,20 @@ box:
    - rabbitmq:rabbitmq.ntipa.it
    - solr:solr.ntipa.it
   image: tornabene/ntipa-box
+boxConsumer:
+  ports:
+   - "9333:9333"
+  expose:
+   - "9333"
+  environment:
+   - "MONGO_HOST=mongo.ntipa.com"
+   - "SOLR_HOST=solr.ntipa.com"
+   - "RABBITMQ_ADDRESSES=rabbitmq.ntipa.com:5672"   
+  links:
+   - mongodb:mongo.ntipa.com
+   - rabbitmq:rabbitmq.ntipa.com
+   - solr:solr.ntipa.com
+  image: tornabene/ntipa-box-consumer
 manager:
   dns:
   - 10.10.130.35
