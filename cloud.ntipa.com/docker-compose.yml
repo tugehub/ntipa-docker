@@ -1,6 +1,4 @@
-nginx:
-  hostname: cloud
-  domainname: ntipa.com
+web:
   dns:
   - 10.10.130.35
   - 8.8.8.8
@@ -12,12 +10,9 @@ nginx:
    - box
    - manager
    - manager:protocollo
-   - solr:solr.ntipa.it
+   - solr
   image: tornabene/ntipa-nginx
 box:
-  dns:
-  - 10.10.130.35
-  - 8.8.8.8
   ports:
    - "8333:8333"
   expose:

@@ -7,7 +7,7 @@ map $http_upgrade $connection_upgrade {
 #si devono scoprire da soli
 
 upstream solr_prod {
-        server solr.ntipa.it:8983;
+        server solr:8983;
 }
 
 upstream manager_prod {
@@ -37,8 +37,8 @@ server {
             proxy_set_header Upgrade $http_upgrade;
             proxy_set_header Connection $connection_upgrade;
           }
-
-		 location /solr {
+          
+        location /solr {
             proxy_pass http://solr_prod/solr;
             proxy_redirect off;
             proxy_set_header        Host            $host;
