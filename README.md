@@ -42,7 +42,7 @@ sudo rm -fr /opt/ntipa
 
 
 vi /etc/default/docker
-DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"
+DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"sudo servi	
 
 export DOCKER_HOST=tcp://localhost:4243
 

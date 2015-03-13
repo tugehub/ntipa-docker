@@ -1,4 +1,9 @@
 nginx:
+  hostname: cloud
+  domainname: ntipa.com
+  dns:
+  - 10.10.130.35
+  - 8.8.8.8
   ports:
    - "80:80"
   expose:
@@ -10,6 +15,9 @@ nginx:
    - solr:solr.ntipa.it
   image: tornabene/ntipa-nginx
 box:
+  dns:
+  - 10.10.130.35
+  - 8.8.8.8
   ports:
    - "8333:8333"
   expose:
@@ -22,6 +30,9 @@ box:
    - solr:solr.ntipa.it
   image: tornabene/ntipa-box
 manager:
+  dns:
+  - 10.10.130.35
+  - 8.8.8.8
   ports:
    - "8081:8081"
   expose:
@@ -64,5 +75,7 @@ solr:
   image: tornabene/ntipa-solr
   ports:
    - "8983:8983"
+  volumes:
+   - /opt/ntipa/solr_data:/opt/solr/example/solr/ntipa/data/ 
   expose:
    - "8983"

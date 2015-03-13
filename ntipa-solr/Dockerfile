@@ -24,7 +24,7 @@ RUN  cat core.properties
 ADD schema.xml /opt/solr/example/solr/ntipa/conf/schema.xml
 RUN rm -f /opt/solr/example/solr/ntipa/data/*
 
-EXPOSE 22
 EXPOSE 8983
 
-CMD /usr/bin/supervisord
+WORKDIR /opt/solr/example
+CMD /usr/bin/java -Xmx1024m  -Dsolr.clustering.enabled=true  -jar /opt/solr/example/start.jar
