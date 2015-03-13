@@ -3,10 +3,6 @@ boxConsumer:
    - "MONGO_HOST=172.17.42.1"
    - "SOLR_HOST=172.17.42.1"
    - "RABBITMQ_ADDRESSES=172.17.42.1:5672"   
-  links:
-   - mongodb:mongo.ntipa.com
-   - rabbitmq:rabbitmq.ntipa.com
-   - solr:solr.ntipa.com
   image: tornabene/ntipa-box-consumer
 web:
   dns:
