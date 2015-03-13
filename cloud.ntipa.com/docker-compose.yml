@@ -65,9 +65,11 @@ postgres:
   expose:
    - "5432"
 rabbitmq:
+  hostname: rabbitmq
   image: tornabene/ntipa-rabbitmq
   volumes:
-   - /opt/ntipa/rabbitmq_data:/var/lib/rabbitmq
+   - /opt/ntipa/rabbitmq_log:/data/log 
+   - /opt/ntipa/rabbitmq_data:/data/mnesi
   ports:
    - "5672:5672"
    - "15672:15672"

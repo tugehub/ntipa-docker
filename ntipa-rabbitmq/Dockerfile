@@ -19,17 +19,30 @@ RUN /usr/sbin/rabbitmq-plugins enable rabbitmq_management
 RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_stomp
 RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_shovel
 RUN echo "[{rabbit, [{loopback_users, []}]}]." > /etc/rabbitmq/rabbitmq.config
-ADD set_rabbitmq_password.sh /set_rabbitmq_password.sh
 
-ADD rabbitmq.sh /rabbitmq.sh
+
+ADD set_rabbitmq_password.sh /set_rabbitmq_password.sh
 ADD run.sh /run.sh
-ADD rabbitmq.conf  /etc/supervisor/conf.d/rabbitmq.conf
- 
 RUN chmod 755 /*.sh
 RUN  /run.sh
 
-WORKDIR /var/log
-RUN service  rabbitmq-server stop
-EXPOSE 5672 15672 4369 22
+#ENV RABBITMQ_MNESIA_DIR /data/
 
-CMD /usr/bin/supervisord
+ENV RABBITMQ_LOG_BASE /data/log
+ENV RABBITMQ_MNESIA_BASE /data/mnesia
+
+# Define mount points.
+VOLUME ["/data/log", "/data/mnesia"]
+
+# Define working directory.
+WORKDIR /data
+
+
+# Add files.
+ADD rabbitmq-start /usr/local/bin/
+RUN chmod +x /usr/local/bin/rabbitmq-start
+
+CMD ["rabbitmq-start"]
+
+EXPOSE 5672 15672 4369 61613 25672 4369
+

@@ -35,6 +35,5 @@ RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so
 
 
 RUN whereis java
-EXPOSE 22
 
-CMD ["/usr/bin/supervisord"]
+
