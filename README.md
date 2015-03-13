@@ -36,14 +36,18 @@ echo "/dev/vdb1    /opt    ext4    defaults    0    1" >> /etc/fstab
 #CANCELLA TUTTI I DATI
 sudo rm -fr /opt/ntipa
 
-`sudo mkdir -p /opt/ntipa/mongodb_data`
-`sudo mkdir -p /opt/ntipa/postgresql_data`
-`sudo mkdir -p /opt/ntipa/rabbitmq_data`
+ `sudo mkdir -p /opt/ntipa/mongodb_data`
+ `sudo mkdir -p /opt/ntipa/postgresql_data`
+ `sudo mkdir -p /opt/ntipa/rabbitmq_data`
+ `sudo mkdir -p /opt/ntipa/rabbitmq_log`
+ `sudo chmod 777 /opt/ntipa/rabbitmq_data`
+ `sudo chmod 777 /opt/ntipa/rabbitmq_log`
+ 
 
 
 vi /etc/default/docker
-DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"sudo servi	
-
+DOCKER_OPTS="-H tcp://127.0.0.1:4243 -H unix:///var/run/docker.sock"
+sudo service docker restart	
 export DOCKER_HOST=tcp://localhost:4243
 
 
