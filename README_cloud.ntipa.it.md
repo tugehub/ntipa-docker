@@ -41,7 +41,13 @@ echo "/dev/vdb1    /opt    ext4    defaults    0    1" >> /etc/fstab
 ##ntipa-tidocker per amia
 
 #CANCELLA TUTTI I DATI
- 
+##ATTENZIONE CANELLA CONTAINER E IMAGES RELATIVAMENTE 
+ #!/bin/bash
+# Delete all containers
+docker rm $(docker ps -a -q)
+# Delete all images
+docker rmi $(docker images -q)
+
 
 `sudo rm -fr /opt/ntipa`
 	

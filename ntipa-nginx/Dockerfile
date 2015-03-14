@@ -1,7 +1,8 @@
-FROM tornabene/docker-ntipa-base
-
+FROM ubuntu:trusty
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get -y update
 
 RUN apt-get install -y --force-yes nginx curl vim
 

@@ -3,17 +3,18 @@ FROM ubuntu:trusty
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
-RUN apt-get update
+
 
 ADD rabbitmq-signing-key-public.asc /tmp/rabbitmq-signing-key-public.asc
 RUN apt-key add /tmp/rabbitmq-signing-key-public.asc
 
 RUN echo "deb http://www.rabbitmq.com/debian/ testing main" > /etc/apt/sources.list.d/rabbitmq.list
-RUN apt-get update 
+RUN apt-get -y update
 
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
+RUN apt-get install -yqq inetutils-ping net-tools
 RUN apt-get -qq -y install rabbitmq-server
 RUN /usr/sbin/rabbitmq-plugins enable rabbitmq_management
 RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_stomp
