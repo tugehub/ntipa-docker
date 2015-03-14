@@ -3,16 +3,18 @@ MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
  
-
-RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 RUN apt-get -y update
 RUN apt-get -y install wget
-RUN apt-get install -yqq inetutils-ping net-tools
+RUN echo "deb http://archive.ubuntu.com/ubuntu trusty main universe" > /etc/apt/sources.list
 
 RUN wget --quiet --no-check-certificate -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | apt-key add -
 RUN echo "deb http://apt.postgresql.org/pub/repos/apt/ trusty-pgdg main" >> /etc/apt/sources.list
 RUN apt-get -y update
-RUN apt-get -y upgrade
+
+
+RUN apt-get install -yqq inetutils-ping net-tools 
+
+
 
 RUN locale-gen --no-purge it_IT.UTF-8
 ENV LC_ALL it_IT.UTF-8
