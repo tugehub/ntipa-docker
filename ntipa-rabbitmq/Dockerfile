@@ -1,9 +1,9 @@
 # Ntipa RabbitMQ
-FROM tornabene/docker-ntipa-base
-
-MAINTAINER Tindaro Tornaebne "tindaro.tornabene@gmail.com"
+FROM ubuntu:trusty
+MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 
 ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
 
 ADD rabbitmq-signing-key-public.asc /tmp/rabbitmq-signing-key-public.asc
 RUN apt-key add /tmp/rabbitmq-signing-key-public.asc
