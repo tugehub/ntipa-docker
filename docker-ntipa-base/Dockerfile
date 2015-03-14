@@ -1,4 +1,4 @@
-# NTIPA-SOLR 0.0.1
+# NTIPA-BASE 0.0.1
 FROM ubuntu:trusty
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 

@@ -41,10 +41,19 @@ echo "/dev/vdb1    /opt    ext4    defaults    0    1" >> /etc/fstab
 ##ntipa-tidocker per amia
 
 #CANCELLA TUTTI I DATI
-sudo rm -fr /opt/ntipa
+ 
 
-`sudo mkdir -p /opt/ntipa/mongodb_data`
-`sudo mkdir -p /opt/ntipa/postgresql_data`
-`sudo mkdir -p /opt/ntipa/rabbitmq_data`
-`sudo mkdir -p /opt/ntipa/solr_data`
+`sudo rm -fr /opt/ntipa`
+	
+ 	`sudo mkdir -p /opt/ntipa/mongodb_data`
+ 	
+ 	`sudo mkdir -p /opt/ntipa/postgresql_data`
+ 	
+ 	`sudo mkdir -p /opt/ntipa/rabbitmq_data`
+ 	
+ 	`sudo mkdir -p /opt/ntipa/rabbitmq_log`
+ 	
+ 	`sudo chmod 777 /opt/ntipa/rabbitmq_data`
+ 	
+ 	`sudo chmod 777 /opt/ntipa/rabbitmq_log`
 
