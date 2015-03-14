@@ -1,0 +1,42 @@
+mongodb:
+  image: tornabene/ntipa-mongodb
+  volumes:
+   - /opt/ntipa/mongodb_data:/data/db
+  ports:
+   - "27017:27017"
+  expose:
+   - "27017"
+postgres:
+  image: tornabene/ntipa-postgres
+  volumes:
+   - /opt/ntipa/postgresql_data:/var/lib/postgresql
+  ports:
+   - "5432:5432"
+  expose:
+   - "5432"
+rabbitmq:
+  hostname: rabbitmq
+  image: tornabene/ntipa-rabbitmq
+  volumes:
+   - /opt/ntipa/rabbitmq_log:/data/log 
+   - /opt/ntipa/rabbitmq_data:/data/mnesi
+  ports:
+   - "5672:5672"
+   - "15672:15672"
+   - "61613:61613"
+   - "25672:25672"
+   - "4369:4369"
+  expose:
+   - "5672:5672"
+   - "15672:15672"
+   - "61613:61613"
+   - "25672:25672"
+   - "4369:4369"
+solr:
+  image: tornabene/ntipa-solr
+  ports:
+   - "8983:8983"
+  volumes:
+   - /opt/ntipa/solr_data:/opt/solr/example/solr/ntipa/data/ 
+  expose:
+   - "8983"
