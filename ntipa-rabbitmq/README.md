@@ -5,6 +5,8 @@
 	Spostarsi nella directory e lanciare il comando
     `sudo docker build -t tornabene/ntipa-rabbitmq .`
   
+   `sudo docker run -ti --rm -p 5672:5672 -p 15672:15672    tornabene/ntipa-rabbitmq`
+   
 ### To run:
 
     `sudo docker run -d --name rabbitmq.ntipa.it -p 5672:5672 -p 15672:15672 -p 1522:22  tornabene/ntipa-rabbitmq`
