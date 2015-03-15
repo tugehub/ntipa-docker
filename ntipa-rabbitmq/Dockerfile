@@ -44,6 +44,7 @@ ADD rabbitmq-start /usr/local/bin/
 RUN chmod +x /usr/local/bin/rabbitmq-start
 
 
+USER root
 
 EXPOSE 5672 15672 4369 61613 25672 4369
 
