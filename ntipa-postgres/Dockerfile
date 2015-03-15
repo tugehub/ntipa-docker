@@ -21,7 +21,7 @@ ENV LC_ALL it_IT.UTF-8
 RUN update-locale LANG=it_IT.UTF-8
 
 RUN apt-get -y install postgresql-9.4 postgresql-contrib-9.4 postgresql-9.4-postgis-2.1 postgis postgresql-client-9.4
-RUN echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/9.3/main/pg_hba.conf
+RUN echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/9.4/main/pg_hba.conf
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN service postgresql start && \
@@ -48,5 +48,4 @@ ADD start.sh /start.sh
 RUN chmod 0755 /start.sh
 
 CMD ["/start.sh"]
-
-#CMD ["/usr/lib/postgresql/9.3/bin/postgres", "-D", "/var/lib/postgresql/9.3/main", "-c", "config_file=/etc/postgresql/9.3/main/postgresql.conf"]
+ 
