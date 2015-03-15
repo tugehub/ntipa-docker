@@ -20,7 +20,7 @@ RUN locale-gen --no-purge it_IT.UTF-8
 ENV LC_ALL it_IT.UTF-8
 RUN update-locale LANG=it_IT.UTF-8
 
-RUN apt-get -y install postgresql-9.3 postgresql-contrib-9.3 postgresql-9.3-postgis-2.1 postgis postgresql-client-9.3
+RUN apt-get -y install postgresql-9.4 postgresql-contrib-9.4 postgresql-9.4-postgis-2.1 postgis postgresql-client-9.4
 RUN echo "host    all             all             0.0.0.0/0               md5" >> /etc/postgresql/9.3/main/pg_hba.conf
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -37,8 +37,8 @@ RUN service postgresql start && \
  /bin/su postgres -c "createdb -O ntipa ntipa-drupal-dev"
  
 RUN service postgresql stop
-RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.3/main/postgresql.conf
-RUN echo "port = 5432" >> /etc/postgresql/9.3/main/postgresql.conf
+RUN echo "listen_addresses = '*'" >> /etc/postgresql/9.4/main/postgresql.conf
+RUN echo "port = 5432" >> /etc/postgresql/9.4/main/postgresql.conf
 
 
 
