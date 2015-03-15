@@ -14,8 +14,8 @@ RUN apt-get -y update
 ENV NOTVISIBLE "in users profile"
 RUN echo "export VISIBLE=now" >> /etc/profile
 
-RUN apt-get install -yqq inetutils-ping net-tools
-RUN apt-get -qq -y install rabbitmq-server
+RUN apt-get install -yqq inetutils-ping net-tools rabbitmq-server
+
 RUN /usr/sbin/rabbitmq-plugins enable rabbitmq_management
 RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_stomp
 RUN /usr/sbin/rabbitmq-plugins enable enable rabbitmq_shovel
