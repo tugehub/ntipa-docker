@@ -3,4 +3,6 @@ echo "Stasrting rabbitmq"
 #ulimit -n 1024
 chown -R rabbitmq:rabbitmq /data
 echo "Stasrting rabbitmq"
-exec rabbitmq-server $@
+whereis rabbitmq-server
+
+rabbitmq-server $@
