@@ -1,0 +1,7 @@
+boxConsumer:
+  environment:
+   - "MONGO_HOST=192.168.111.21"
+   - "SOLR_HOST=192.168.111.21"
+   - "RABBITMQ_ADDRESSES=192.168.111.21:5672"   
+  image: tornabene/ntipa-box-consumer
+
