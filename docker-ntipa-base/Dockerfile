@@ -5,8 +5,6 @@ MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
 ENV DEBIAN_FRONTEND noninteractive
 RUN apt-get update
 RUN apt-get -y -q  install  python-software-properties software-properties-common
-RUN apt-get -y install openssh-server && mkdir /var/run/sshd
-RUN apt-get -y install supervisor
 RUN apt-get install -yqq inetutils-ping net-tools
 
 # install oracle java from PPA
@@ -19,21 +17,21 @@ RUN apt-get -y install oracle-java7-installer && apt-get clean
 RUN update-java-alternatives -s java-7-oracle
 RUN echo "export JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> ~/.bashrc
 
+ENV POSTGRES_HOST 127.0.0.1
+ENV MONGO_HOST 127.0.0.1
+ENV SOLR_HOST 127.0.0.1
+ENV RABBITMQ_ADDRESSES 127.0.0.1:5672
+
+
+RUN echo "POSTGRES_HOST $POSTGRES_HOST."
+RUN echo "MONGO_HOST $MONGO_HOST."
+RUN echo "SOLR_HOST $SOLR_HOST."
+RUN echo "RABBITMQ_ADDRESSES $RABBITMQ_ADDRESSES."
+
+
 WORKDIR /opt
-
-WORKDIR /etc/supervisor/conf.d
-RUN mkdir -p   /var/run/sshd /var/log/supervisor
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-
-
-# configure the "ntipa" and "root" users
-RUN echo 'root:ntipa' |chpasswd
-RUN groupadd ntipa && useradd ntipa -s /bin/bash -m -g ntipa -G ntipa && adduser ntipa sudo
-RUN echo 'ntipa:ntipa' |chpasswd	
-RUN sed -i 's/PermitRootLogin without-password/PermitRootLogin yes/' /etc/ssh/sshd_config
-RUN sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
-
-
 RUN whereis java
 
-
+EXPOSE 8080
+EXPOSE 8333
+EXPOSE 8081

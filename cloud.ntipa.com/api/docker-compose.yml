@@ -1,47 +1,36 @@
-#boxConsumer:
-#  environment:
-#   - "MONGO_HOST=172.17.42.1"
-#   - "SOLR_HOST=172.17.42.1"
-#   - "RABBITMQ_ADDRESSES=172.17.42.1:5672"   
-#  image: tornab1ene/ntipa-box-consumer
-web:
-  dns:
-  - 10.10.130.35
-  - 8.8.8.8
-  ports:
-   - "80:80"
-  expose:
-   - "80"   
-  links:
-   - box
-   - manager
-   - manager:protocollo
-   - solr
-  image: tornabene/ntipa-nginx
 box:
+  environment:
+   - "MONGO_HOST=192.168.111.21"
+   - "POSTGRES_HOST=192.168.111.21"
+   - "SOLR_HOST=192.168.111.21"
+   - "RABBITMQ_ADDRESSES=192.168.111.21:5672" 
   ports:
    - "8333:8333"
   expose:
    - "8333"     
-  links:
-   - manager     
-   - postgres:postgres.ntipa.it
-   - mongodb:mongo.ntipa.it
-   - rabbitmq:rabbitmq.ntipa.it
-   - solr:solr.ntipa.it
   image: tornabene/ntipa-box
 manager:
-  dns:
-  - 10.10.130.35
-  - 8.8.8.8
   ports:
    - "8081:8081"
   expose:
    - "8081"
-  links:
-   - postgres:postgres.ntipa.it
-   - mongodb:mongo.ntipa.it
-   - rabbitmq:rabbitmq.ntipa.it
-   - solr:solr.ntipa.it
-  image: tornabene/ntipa-manager  
-
+  environment:
+   - "MONGO_HOST=192.168.111.21"
+   - "POSTGRES_HOST=192.168.111.21"
+   - "SOLR_HOST=192.168.111.21"
+   - "RABBITMQ_ADDRESSES=192.168.111.21:5672" 
+  image: tornabene/ntipa-manager
+#web:
+#  dns:
+#  - 10.10.130.35
+#  - 8.8.8.8
+#  ports:
+#   - "80:80"
+#  expose:
+#   - "80"   
+#  links:
+#   - box
+#   - manager
+#   - manager:protocollo
+#   - solr
+#  image: tornabene/ntipa-nginx
