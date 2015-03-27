@@ -54,7 +54,7 @@ docker rm $(docker ps -a -q)
 docker rmi $(docker images -q)
 
 
-`sudo rm -fr /opt/ntipa`
+	`sudo rm -fr /opt/ntipa`
 	
  	`sudo mkdir -p /opt/ntipa/mongodb_data`
  	
@@ -67,4 +67,9 @@ docker rmi $(docker images -q)
  	`sudo chmod 777 /opt/ntipa/rabbitmq_data`
  	
  	`sudo chmod 777 /opt/ntipa/rabbitmq_log`
+ 	
+	`sudo  mkdir -p /opt/ntipa/redis_data`	
 
+
+
+sudo docker run --name ntipa-redis -tid -p 6379:6379 -v /opt/ntipa/redis_data:/data  redis redis-server --appendonly yes

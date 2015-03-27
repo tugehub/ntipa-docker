@@ -22,4 +22,8 @@ Here we persistently save our data to the host machine's
 
   -v /opt/ntipa/rabbitmq_log:/data/log -v /opt/ntipa/rabbitmq_data:/data/mnesia
     
-`sudo docker run -ti -p 5672:5672 -p 15672:15672 -p 1522:22   -v /opt/ntipa/rabbitmq_log:/data/log -v /opt/ntipa/rabbitmq_data:/data/mnesia  tornabene/ntipa-rabbitmq`
+`sudo docker run -ti -p 5672:5672 -p 15672:15672  -p  4369:4369 -p  25672:25672 -p 61613:61613 -v /opt/ntipa/rabbitmq_log:/data/log -v /opt/ntipa/rabbitmq_data:/data/mnesia  tornabene/ntipa-rabbitmq`
+
+
+    
+   
