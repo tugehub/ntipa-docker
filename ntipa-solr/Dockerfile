@@ -1,6 +1,21 @@
 # NTIPA-SOLR 0.0.1
-FROM tornabene/docker-ntipa-base
+FROM ubuntu:trusty
 MAINTAINER Tindaro Tornabene <tindaro.tornabene@gmail.com>
+
+ENV DEBIAN_FRONTEND noninteractive
+RUN apt-get update
+RUN apt-get -y -q  install  python-software-properties software-properties-common
+RUN apt-get install -yqq inetutils-ping net-tools
+
+# install oracle java from PPA
+RUN add-apt-repository ppa:webupd8team/java -y
+RUN apt-get update
+RUN echo oracle-java7-installer shared/accepted-oracle-license-v1-1 select true | /usr/bin/debconf-set-selections
+RUN apt-get -y install oracle-java7-installer && apt-get clean
+
+# Set oracle java as the default java
+RUN update-java-alternatives -s java-7-oracle
+RUN echo "export JAVA_HOME=/usr/lib/jvm/java-7-oracle" >> ~/.bashrc
 
 ENV SOLR solr-4.10.2
 WORKDIR /opt
@@ -10,9 +25,6 @@ RUN wget http://apache.fastbull.org/lucene/solr/4.10.2/$SOLR.tgz -O /opt/$SOLR.t
 RUN ls -lah /opt
 RUN tar -C /opt --extract --file /opt/$SOLR.tgz
 RUN ln -s /opt/$SOLR /opt/solr
-
-WORKDIR /etc/supervisor/conf.d
-ADD solr.conf  /etc/supervisor/conf.d/solr.conf
 
 WORKDIR /opt/solr/example/solr
 RUN cp -r collection1/ ntipa/
