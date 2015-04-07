@@ -40,9 +40,13 @@ Last cylinder or +size or +sizeM or +sizeK (197-621, default 621): +128M
 Now to write the new partion and exit, press w and enter.
 You should be ready to make a filesystem now.
 
+sudo apt-get install xfsprogs
+sudo mkfs.xfs /dev/vdb1
 
 sudo mkfs.ext4 /dev/vdb1
+
 echo "/dev/vdb1    /opt    ext4    defaults    0    1" >> /etc/fstab
+echo "/dev/vdb1    /opt    xfs    defaults    0    1" >> /etc/fstab
 ##ntipa-tidocker per amia
 
 #CANCELLA TUTTI I DATI
@@ -56,7 +60,7 @@ docker rmi $(docker images -q)
 
 	`sudo rm -fr /opt/ntipa`
 	
- 	`sudo mkdir -p /opt/ntipa/mongodb_data`
+ 	`lsbl	`
  	
  	`sudo mkdir -p /opt/ntipa/postgresql_data`
  	
