@@ -1,0 +1,16 @@
+[Unit]
+Description=Local docker registry/repository
+After=etcd.service
+After=docker.service
+
+[Service]
+TimeoutStartSec=0
+KillMode=none
+EnvironmentFile=/etc/environment
+ExecStartPre=-/usr/bin/docker kill docker-registry
+ExecStartPre=-/usr/bin/docker rm docker-registry
+ExecStart=/usr/bin/docker run --name docker-registry -p ${COREOS_PRIVATE_IP}:5000:5000 -v /opt/registry/:/var/docker-repo/ registry
+ExecStop=/usr/bin/docker stop docker-registry
+
+[Install]
+WantedBy = multi-user.target
