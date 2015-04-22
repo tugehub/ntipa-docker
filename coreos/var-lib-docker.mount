@@ -1,0 +1,14 @@
+#cloud-config
+coreos:
+  units:
+    - name: var-lib-docker.mount
+      command: start
+      content: |
+        [Unit]
+        Description=Mount storage to /var/lib/docker
+        DefaultDependencies=no
+        Before=docker.service
+        [Mount]
+        What=/dev/vdb
+        Where=/var/lib/docker
+        Type=ext4
