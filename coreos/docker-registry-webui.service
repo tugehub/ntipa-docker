@@ -10,7 +10,7 @@ KillMode=none
 EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill docker-registry-webui
 ExecStartPre=-/usr/bin/docker rm docker-registry-webui
-ExecStart=/usr/bin/docker run --name docker-registry-webui -p ${COREOS_PRIVATE_IPV4}:8080:8080 atcol/docker-registry-ui
+ExecStart=/usr/bin/docker run --name docker-registry-webui -p ${COREOS_PRIVATE_IPV4}:8080:8080 -v /home/core/data/webui:/var/lib/h2 -e REG1=http://192.168.111.34:5000/v1/ atcol/docker-registry-ui
 ExecStop=/usr/bin/docker stop docker-registry-webui
 
 [Install]

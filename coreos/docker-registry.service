@@ -9,7 +9,7 @@ KillMode=none
 EnvironmentFile=/etc/environment
 ExecStartPre=-/usr/bin/docker kill docker-registry
 ExecStartPre=-/usr/bin/docker rm docker-registry
-ExecStart=/usr/bin/docker run --name docker-registry -p ${COREOS_PRIVATE_IP}:5000:5000 -v /opt/registry/:/var/docker-repo/ registry
+ExecStart=/usr/bin/docker run --name docker-registry -p ${COREOS_PRIVATE_IP}:5000:5000 -v /opt/registry/:/tmp/registry-dev/ -v /home/core/docker-registry/config/:/docker-registry/config/ -e DOCKER_REGISTRY_CONFIG=/docker-registry/config/config_sample.yml -e SETTINGS_FLAVOR=local registry
 ExecStop=/usr/bin/docker stop docker-registry
 
 [Install]
