@@ -1,0 +1,32 @@
+#!/bin/sh -e
+#
+# rc.local
+#
+# This script is executed at the end of each multiuser runlevel.
+# Make sure that the script will "exit 0" on success or any other
+# value on error.
+#
+# In order to enable or disable this script just change the execution
+# bits.
+#
+# By default this script does nothing.
+#/sbin/iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+#/sbin/iptables -t filter -P FORWARD ACCEPT
+iptables -t nat -A POSTROUTING -o eth2 -j MASQUERADE
+iptables --table nat --append POSTROUTING --out-interface ppp0 -j MASQUERADE
+iptables -I INPUT -s 192.168.1.0/24 -i ppp0 -j ACCEPT
+iptables --append FORWARD --in-interface eth2 -j ACCEPT
+iptables -I INPUT -p tcp --dport 1723 -m state --state NEW -j ACCEPT
+iptables -I INPUT -p gre -j ACCEPT
+iptables -I FORWARD -p tcp --tcp-flags SYN,RST SYN -s 192.168.1.0/24 -j TCPMSS  --clamp-mss-to-pmtu
+iptables -t filter -A INPUT -p tcp --dport 9418 -j ACCEPT
+iptables -t filter -A OUTPUT -p tcp --dport 9418 -j ACCEPT
+
+echo 1 > /proc/sys/net/ipv4/ip_forward
+#echo "net.ipv4.conf.default.send_redirects = 0" |  tee -a /etc/sysctl.conf
+#echo "net.ipv4.icmp_ignore_bogus_error_responses = 1" |  tee -a /etc/sysctl.conf
+
+#for vpn in /proc/sys/net/ipv4/conf/*; do echo 0 > $vpn/accept_redirects; echo 0 > $vpn/send_redirects; done
+
+route add default gw 192.168.1.254
+#route add default gw 192.168.0.1exit 0
